@@ -1,0 +1,14 @@
+OASISFormat: 0.3
+Name:        buildpack-ocaml-ocamlnet
+Version:     1.0.0
+Synopsis:    sample for buildpack-ocaml
+Authors:     mzp
+License:     GPL-3.0
+Plugins:     META (0.3), StdFiles (0.3), DevFiles (0.3)
+
+Executable server
+  Path:       src
+  BuildTools: ocamlbuild
+  MainIs:     main.ml
+  Builddepends: nethttpd
+  CompiledObject: best
