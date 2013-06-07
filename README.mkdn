@@ -1,0 +1,58 @@
+Heroku buildpack sample
+=======================
+
+This is sample for [heroku-buildpack-ocaml](https://github.com/heroku-buildpack-ocaml/heroku-buildpack-ocaml).
+
+If you deployed this, you could see a page like [this](http://buildpack-ocaml-ocamlnet.herokuapp.com/).
+
+Prerequires
+--------------------
+
+ * git
+ * OCaml 4.00.1
+ * [heroku toolbelt](https://toolbelt.heroku.com/)
+ * (optional) OPAM 1.00
+ * (optional) oasis 0.3.0
+
+How to use
+--------------------
+### Setup Heroku App
+
+First, create heroku app:
+
+    $ heroku create buildpack-ocaml-ocamlnet --buildpack https://github.com/mzp/heroku-buildpack-ocaml
+
+### Run at local
+
+To run server, build with `make`:
+
+    $ opam install ocamlnet
+    $ make
+    $ ./main.native 8080
+
+And access http://localhost:8080.
+
+### Deploy to heroku
+
+Write and commit `Procfile` to specify executable file:
+
+    web: ./_build/src/main.native $PORT
+
+Write `setup-opam` to install packages:
+
+    opam install -y ocamlnet
+
+Push this:
+
+    $ git push heroku master
+
+Set a process number:
+
+    $ heroku ps:scale web=1
+
+Access [http://buildpack-ocaml-hello.herokuapp.com/](http://buildpack-ocaml-hello.herokuapp.com/).
+
+Bug reports
+------------
+
+Send issues or pull request to [heroku-buildpack-ocaml/heroku-buildpack-ocaml](https://github.com/heroku-buildpack-ocaml/heroku-buildpack-ocaml)
